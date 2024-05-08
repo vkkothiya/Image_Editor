@@ -6,10 +6,12 @@ import { auth } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 
 const AddTransformationTypePage = async ({ params: { type } }: SearchParamProps) => {
-  // const { userId } = auth();
+  const { userId } = auth();
   const transformation = transformationTypes[type];
 
-  // if(!userId) redirect('/sign-in')
+  const creditBalance = 10
+
+  if(!userId) redirect('/sign-in')
 
   // const user = await getUserById(userId);
 
@@ -24,8 +26,10 @@ const AddTransformationTypePage = async ({ params: { type } }: SearchParamProps)
         <TransformationForm 
           action="Add"
           // userId={user._id}
+          userId={userId}
           type={transformation.type as TransformationTypeKey}
           // creditBalance={user.creditBalance}
+          creditBalance={creditBalance}
         />
       </section>
     </>
