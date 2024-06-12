@@ -6,6 +6,7 @@ import { NextResponse } from "next/server";
 import { Webhook } from "svix";
 
 import { createUser, deleteUser, updateUser } from "@/lib/actions/user.actions";
+import { log } from "console";
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
@@ -55,7 +56,7 @@ export async function POST(req: Request) {
 
   // Get the ID and type
   const { id } = evt.data;
-  const eventType = evt.type;
+  const eventType = evt.type;  
 
   // CREATE
   if (eventType === "user.created") {
@@ -68,12 +69,12 @@ export async function POST(req: Request) {
       firstName: first_name,
       lastName: last_name,
       photo: image_url,
-    };
+    };    
 
     const newUser = await createUser(user);
 
     // Set public metadata
-    if (newUser) {
+    if (newUser) {  
       await clerkClient.users.updateUserMetadata(id, {
         publicMetadata: {
           userId: newUser._id,

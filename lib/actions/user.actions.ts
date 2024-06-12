@@ -11,7 +11,16 @@ export async function createUser(user: CreateUserParams) {
   try {
     await connectToDatabase();
 
+    console.log("djkjdshfkjhdskjfhdskjh")
+
+    console.log(user)
+
+    console.log("djkjdshfkjhdskjfhdskjhsgkhsdghfkjsdhgkjdsh")
+
+
     const newUser = await User.create(user);
+
+    console.log(newUser)
 
     return JSON.parse(JSON.stringify(newUser)); 
   } catch (error) {
